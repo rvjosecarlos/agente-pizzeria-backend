@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "rootDir": "./src",
+        "outDir": "./dist",
+        "esModuleInterop": true,
+        "declaration": true,
+        "sourceMap": true,
+        "lib": ["ESNext"],
+        "moduleResolution": "nodenext",
+        "module": "nodenext",
+        "strict": true,
+        "allowImportingTsExtensions": true,
+        "rewriteRelativeImportExtensions": true
+    },
+    "include": ["src/**/*.ts"]
+}

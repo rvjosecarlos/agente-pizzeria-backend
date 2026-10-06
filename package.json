@@ -1,0 +1,21 @@
+{
+  "name": "pizzeria-yumi",
+  "version": "1.0.0",
+  "description": "App backend para la creacion de clientes, gestionar y dar seguimiento a sus pedidos.",
+  "author": "Carlos Reynoso",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  }
+}
