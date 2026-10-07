@@ -1,6 +1,6 @@
 import z from "zod";
-import { createClientSchema } from "../types/index.ts";
+import { CreateClientSchema } from "../types/index.ts";
 
-type CreateClientType = z.infer<typeof createClientSchema>;
+type CreateClientType = z.infer<typeof CreateClientSchema>;
 
 export type { CreateClientType };

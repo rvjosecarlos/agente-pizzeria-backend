@@ -3,7 +3,7 @@ import mongoose, { Date, Document, Schema, Types } from "mongoose";
 export interface IPedido {
     clientId: Types.ObjectId,
     orderDetailIds: Types.ObjectId[],
-    total: string,
+    total: number,
     estado: string
 };
 

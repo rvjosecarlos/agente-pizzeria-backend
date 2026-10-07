@@ -3,7 +3,7 @@ import z from "zod";
 const ClientSchema = z.object({
     id: z.string(),
     name: z.string(),
-    phone: z.string(),
+    phone: z.string().regex(/\d{10}/, "El número de teléfono debe ser de al menos 10 digitos"),
     idConversation: z.string()
 });
 
@@ -26,15 +26,13 @@ const CreateDetailPedidoSchema = DetailPedidoSchema.pick({
 
 const PedidoSchema = z.object({
     id: z.string(),
-    fecha: z.date(),
     clientId: z.string(),
     orderDetailIds: z.array(z.string()),
-    total: z.string(),
-    estado: z.string()
+    total: z.number(),
+    estado: z.string().optional()
 });
 
 const CreatePedidoSchema = PedidoSchema.pick({
-    fecha: true,
     clientId: true,
     total: true
 }).extend({

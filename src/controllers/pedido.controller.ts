@@ -6,6 +6,7 @@ export class PedidoController {
     static crearPedido = async (req: Request, res: Response, next: NextFunction) => {
         try{
             const dto = req.validateRequestData as CreatePedidoType;
+            console.log("DATOS DE ENTRADA",{dto});
             const result = await PedidoService.agregarPedido(dto);
             res.status(200).json({
                 success: true,

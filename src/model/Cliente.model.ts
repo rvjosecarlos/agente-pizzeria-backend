@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema, Types } from "mongoose";
 
-interface ICliente extends Document {
+export interface ICliente extends Document {
     name: string,
     phone: string,
     idConversation: string
