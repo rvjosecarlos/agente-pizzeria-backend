@@ -12,7 +12,6 @@ declare global {
 export const validateWithZod = (zodSchema: ZodType) => {
     return (req: Request, res: Response, next: NextFunction) => {
         try{
-            console.log(" Se valida con zod");
             const requestData = {
                 ...req.body,
                 ...req.params

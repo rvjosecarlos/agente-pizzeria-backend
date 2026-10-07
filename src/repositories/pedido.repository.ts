@@ -8,10 +8,13 @@ export class PedidoRepository {
         return result;
     };
 
-    static findOrders = async (dto: EstadosPedidoType) => {
+    static findOrders = async () => {
         const result = await PedidoModel.find({
-            estado: { $in: dto }
-        });
+            estado: { $ne: "cancelado" }
+        }).populate([
+            { path: "clientId" },
+            { path: "orderDetailIds", populate: { path: "itemId", select: "name size precio" } }
+        ]);
         return result;
     };
 

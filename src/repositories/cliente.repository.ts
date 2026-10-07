@@ -4,7 +4,6 @@ import { ClienteModel } from "../model/Cliente.model.ts";
 export class ClienteRepository {
     static insertClient = async (dto: CreateClientType) => {
         const result = await ClienteModel.insertOne(dto);
-        console.log("Ususario registrado");
         return result;
     };
 };

@@ -1,12 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import { CreateClientType } from "../dtos/cliente.dto.ts";
 import { ItemService } from "../services/item.service.ts";
-import { GetItemType, ItemType } from "../dtos/item.dto.ts";
+import { CreateItemType, GetItemType, ItemType } from "../dtos/item.dto.ts";
 
 export class ItemController {
     static createItem = async (req: Request, res: Response, next: NextFunction) => {
         try{
-            const dto = req.validateRequestData as CreateClientType;
+            const dto = req.validateRequestData as CreateItemType;
             const result = await ItemService.addItem(dto);
             res.status(200).json({
                 success: true,
@@ -63,7 +63,6 @@ export class ItemController {
             });
         }
         catch(error){
-            console.log("ERROR");
             next(error);
         };
     };

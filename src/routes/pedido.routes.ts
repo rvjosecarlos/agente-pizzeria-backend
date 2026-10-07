@@ -13,7 +13,7 @@ router.post("/orden",
 );
 
 router.get("/ordenes",
-    validateWithZod(EstadosPedidoSchema),
+    //validateWithZod(EstadosPedidoSchema),
     PedidoController.getPedidos,
     errorMiddleware
 );

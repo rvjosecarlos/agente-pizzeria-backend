@@ -32,6 +32,5 @@ export class ItemRepository {
 
     static deleteItemById = async (id: ItemType["id"]) => {
         const result = await ItemModel.findByIdAndDelete(id);
-        console.log("Item eliminado", {result});
     };
 };

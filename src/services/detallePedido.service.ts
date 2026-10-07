@@ -13,7 +13,6 @@ export class OrderDetailService {
         );
         const { success, data, error } = DetailPedidoSchema.array().safeParse(formatResults);
         if( !success ){
-            console.log("ERROR DEL PARSEO", error.message);
             throw new Error(`Error al validar la salida al insertar el detalle del pedido - ORDER_DETAIL: ${JSON.stringify(error.message)}`);
         };
         return data;
