@@ -1,6 +1,6 @@
-import { CreatePedidoType } from "../dtos/pedido.dto.ts";
+import { CreatePedidoType, EstadosPedidoType, OrderType } from "../dtos/pedido.dto.ts";
 import { PedidoRepository } from "../repositories/pedido.repository.ts";
-import { CreateDetailPedidoSchema, DetailPedidoSchema, PedidoSchema } from "../types/index.ts";
+import { DetailPedidoSchema, EstadosPedidoSchema, PedidoSchema } from "../types/index.ts";
 import { OrderDetailService } from "./detallePedido.service.ts";
 
 export class PedidoService {
@@ -35,7 +35,26 @@ export class PedidoService {
         const { success, data, error  } = PedidoSchema.safeParse(formatResult);
         if( !success ){
             console.log("Error en la validacion zod del pedido", { error });
-            throw new Error(`Error al validar la salida al crear el pedido - PEDIDO_SERVICE ${error.message}`);
+            throw new Error(`Error al validar la salida al crear el pedido - ORDER_SERVICE ${error.message}`);
+        };
+        return data;
+    };
+
+    static obtenerPedidos = async (dto: EstadosPedidoType) => {
+        const result = await PedidoRepository.findOrders(dto);
+        const { success, data, error } = PedidoSchema.array().safeParse(result);
+        if( !success ){
+            console.log(`Error al validar la salida de obtener pedido - ORDER_SERVICE ${error.message}`);
+            throw new Error(`Error al validar la salida de obtener pedido - ORDER_SERVICE ${error.message}`);
+        };
+        return data;
+    };
+
+    static actualizarPedido = async (dto: OrderType) => {
+        const result = await PedidoRepository.updatePedido(dto);
+        const { success, data, error } = PedidoSchema.safeParse(result);
+        if( !success ){
+            throw new Error(`Error al validar la salida de actualizar pedido - ORDER_SERVICE: ${error.message}`);
         };
         return data;
     };

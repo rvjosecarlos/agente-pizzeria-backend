@@ -56,6 +56,8 @@ const GetItemSchema = ItemSchema.pick({
     id: true
 });
 
+const EstadosPedidoSchema = z.array(z.literal(["nuevo", "en preparación", "enviado", "completado"]));
+
 export { 
     ClientSchema,
     CreateClientSchema,
@@ -65,5 +67,6 @@ export {
     CreateDetailPedidoSchema, 
     ItemSchema, 
     CreateItemSchema,
-    GetItemSchema
+    GetItemSchema,
+    EstadosPedidoSchema
 };

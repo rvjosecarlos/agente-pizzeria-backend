@@ -1,4 +1,4 @@
-import { CreateOrderDetailType } from "../dtos/detallePedido.dto.ts";
+import { CreateOrderDetailType, OrderDetailType } from "../dtos/detallePedido.dto.ts";
 import { OrderDetailRepository } from "../repositories/detallePedido.repository.ts";
 import { DetailPedidoSchema } from "../types/index.ts";
 
@@ -17,5 +17,9 @@ export class OrderDetailService {
             throw new Error(`Error al validar la salida al insertar el detalle del pedido - ORDER_DETAIL: ${JSON.stringify(error.message)}`);
         };
         return data;
+    };
+
+    static eliminarDetalleOrden = async (dto: OrderDetailType[]) => {
+        await OrderDetailRepository.deleteOrderDetail(dto);
     };
 };
