@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { CreatePedidoType, EstadosPedidoType, OrderType } from "../dtos/pedido.dto.ts";
+import { CreateOrdenType, CreatePedidoType, EstadosPedidoType, OrderType } from "../dtos/pedido.dto.ts";
 import { PedidoService } from "../services/pedido.service.ts";
 
 export class PedidoController {
@@ -15,6 +15,25 @@ export class PedidoController {
             });
         }
         catch(error){
+            next(error);
+        };
+    };
+
+    static crearOrdenAsistente = async (req: Request, res: Response, next: NextFunction) => {
+        try{
+            const dto = req.validateRequestData as CreateOrdenType;
+            console.log("Llamada desde llm", { dto })
+            console.log({ detalles: dto.orderDetailIds });
+            const result = await PedidoService.agregarOrdenAsistente(dto);
+            res.status(200).json({
+                success: true,
+                message: "",
+                errors: [],
+                data: result
+            });
+        }
+        catch(error){
+            console.log({ error });
             next(error);
         };
     };

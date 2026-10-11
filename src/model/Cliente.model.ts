@@ -15,7 +15,6 @@ const ClienteSchema = new Schema({
     phone: {
         type: String,
         trim: true,
-        required: true,
         unique: true
     },
     idConversation: {

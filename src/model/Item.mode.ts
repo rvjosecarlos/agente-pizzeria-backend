@@ -7,6 +7,11 @@ export interface IItem extends Document {
 };
 
 const ItemSchema = new Schema({
+    codigo: {
+        type: String,
+        trim: true,
+        required: true
+    },
     name: {
         type: String,
         trim: true,

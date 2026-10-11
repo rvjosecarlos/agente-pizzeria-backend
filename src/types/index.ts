@@ -1,28 +1,31 @@
 import { Types } from "mongoose";
-import z from "zod";
+import z, { array } from "zod";
 
 const ItemSchema = z.object({
     id: z.union([z.string(), z.instanceof(Types.ObjectId)]),
     name: z.string(),
     size: z.string(),
-    precio: z.number()
+    precio: z.number(),
+    codigo: z.string()
 });
 
 const CreateItemSchema = ItemSchema.pick({
     name: true,
     size: true,
-    precio: true
+    precio: true,
+    codigo: true
 });
 
 const GetItemSchema = ItemSchema.pick({
+    codigo: true,
     id: true
 });
 
 const ClientSchema = z.object({
     id: z.string(),
     name: z.string(),
-    phone: z.string().regex(/\d{10}/, "El número de teléfono debe ser de al menos 10 digitos"),
-    idConversation: z.string()
+    phone: z.string().regex(/\d{10}/, "El número de teléfono debe ser de al menos 10 digitos").optional(),
+    idConversation: z.string().optional()
 });
 
 const CreateClientSchema = ClientSchema.pick({
@@ -54,7 +57,9 @@ const PedidoSchema = z.object({
     clientId: z.union([z.instanceof(Types.ObjectId), z.string()]),
     orderDetailIds: z.union([z.array(z.instanceof(Types.ObjectId)), z.array(z.string())]),
     total: z.number(),
-    estado: z.string().optional()
+    estado: z.string().optional(),
+    origen: z.string(),
+    createdAt: z.union([z.string(), z.date()])
 });
 
 const GetPedidosSchema = z.object({
@@ -62,14 +67,33 @@ const GetPedidosSchema = z.object({
     clientId: ClientSchema,
     orderDetailIds: z.array(GetDetailPedidoSchema),
     total: z.number(),
-    estado: z.literal(["nuevo", "preparando", "enviado", "completado"])
+    estado: z.literal(["nuevo", "preparando", "enviado", "completado"]),
+    origen: z.string(),
+    createdAt: z.date(),
+    updatedAt: z.date()
 });
 
 const CreatePedidoSchema = PedidoSchema.pick({
     clientId: true,
-    total: true
+    total: true,
+    origen: true
 }).extend({
     orderDetailIds: z.array(CreateDetailPedidoSchema)
+});
+
+const CreateOrderDetailsSchema = z.object({
+    tamaño: z.string(),
+    cantidad: z.coerce.number(),
+    nombre: z.string(),
+    precio: z.coerce.number(),
+    codigo: z.string()
+});
+
+const CreateOrdenSchema = z.object({
+    numClient: z.string(),
+    nombreCliente: z.string(),
+    orderDetailIds: z.array(CreateOrderDetailsSchema),
+    idConversation: z.any()
 });
 
 const EstadosPedidoSchema = z.array(z.literal(["nuevo", "preparando", "enviado", "completado"]));
@@ -85,5 +109,7 @@ export {
     CreateItemSchema,
     GetItemSchema,
     EstadosPedidoSchema,
-    GetPedidosSchema
+    GetPedidosSchema,
+    CreateOrderDetailsSchema,
+    CreateOrdenSchema
 };

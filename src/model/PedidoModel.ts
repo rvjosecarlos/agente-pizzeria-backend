@@ -27,6 +27,11 @@ const PedidoSchema = new Schema({
         trim: true,
         required: true,
         default: "nuevo"
+    },
+    origen: {
+        type: String,
+        trim: true,
+        required: true
     }
 }, { timestamps: true });
 

@@ -6,4 +6,14 @@ export class ClienteRepository {
         const result = await ClienteModel.insertOne(dto);
         return result;
     };
+
+    static findClients = async () => {
+        const result = await ClienteModel.find();
+        return result;
+    };
+
+    static findClient = async (dto: { numClient: string }) => {
+        const result = await ClienteModel.findOne({ phone: dto.numClient });
+        return result;
+    };
 };

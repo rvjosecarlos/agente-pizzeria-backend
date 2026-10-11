@@ -22,6 +22,7 @@ export class ItemController {
 
     static getItems = async (req: Request, res: Response, next: NextFunction) => {
         try{
+            console.log("Consulta items")
             const result = await ItemService.getItems();
             res.status(200).json({
                 success: true,

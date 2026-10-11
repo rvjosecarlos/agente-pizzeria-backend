@@ -3,7 +3,8 @@ import { PedidoModel } from "../model/PedidoModel.ts";
 
 
 export class PedidoRepository {
-    static insertPedido = async (dto: Pick<CreatePedidoType, "clientId" | "total" > & { orderDetailIds: string[] }) => {
+    static insertPedido = async (dto: Pick<CreatePedidoType, "clientId" | "total" | "origen"> & { orderDetailIds: string[] }) => {
+        console.log("DESDE REPO", dto)
         const result = await PedidoModel.insertOne(dto);
         return result;
     };
@@ -13,7 +14,7 @@ export class PedidoRepository {
             estado: { $ne: "cancelado" }
         }).populate([
             { path: "clientId" },
-            { path: "orderDetailIds", populate: { path: "itemId", select: "name size precio" } }
+            { path: "orderDetailIds", populate: { path: "itemId" } }
         ]);
         return result;
     };

@@ -1,8 +1,9 @@
 import z from "zod";
-import { CreatePedidoSchema, EstadosPedidoSchema, PedidoSchema } from "../types/index.ts";
+import { CreateOrdenSchema, CreatePedidoSchema, EstadosPedidoSchema, PedidoSchema } from "../types/index.ts";
 
 type CreatePedidoType = z.infer<typeof CreatePedidoSchema>;
 type OrderType = z.infer<typeof PedidoSchema>;
 type EstadosPedidoType = z.infer<typeof EstadosPedidoSchema>;
+type CreateOrdenType = z.infer<typeof CreateOrdenSchema>;
 
-export type { CreatePedidoType, OrderType, EstadosPedidoType };
+export type { CreatePedidoType, OrderType, EstadosPedidoType, CreateOrdenType };

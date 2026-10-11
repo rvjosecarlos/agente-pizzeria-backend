@@ -12,4 +12,9 @@ router.post("/client",
     errorMiddleware
 );
 
+router.get("/clients",
+    ClienteController.getClients,
+    errorMiddleware
+);
+
 export default router;

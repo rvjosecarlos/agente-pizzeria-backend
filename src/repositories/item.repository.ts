@@ -12,6 +12,12 @@ export class ItemRepository {
         return result;
     };
 
+    static findItemsByCodigo = async (dto: { codigo: string }[]) => {
+        const codigos = dto.map((l) => l.codigo);
+        const result =  await ItemModel.find({ codigo: { $in: codigos } });
+        return result;
+    };
+
     static findItemById = async (dto: GetItemType) => {
         const result = await ItemModel.findById(dto.id);
         return result;

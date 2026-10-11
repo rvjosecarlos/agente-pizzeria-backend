@@ -11,4 +11,13 @@ export class ClienteService {
         };
         return data;
     };
+
+    static getClients = async () => {
+        const result = await ClienteRepository.findClients();
+        const { success, data, error } = ClientSchema.array().safeParse(result);
+        if( !success ){
+            throw new Error(`Error al validar la salida de la consulta de clientes CLIENT_SERVICE: ${error.message}`);
+        };
+        return data;
+    };
 };
